@@ -4,21 +4,22 @@
 
 **Setup** (enough for a reader to reproduce your capture):
 ```
-claude --version:  TODO
-mitmproxy version: TODO
-proxy command:     TODO
-settings file:     TODO (path + env block)
+claude --version:  2.16120.0
+mitmproxy version: 12.2.3
+proxy command:     mitmweb --listen-host 127.0.0.1 --listen-port 58888 --web-open-browser --mode reverse:https://api.anthropic.com -w session.flows
+settings file:     C:\Users\Jonathan\Documents\modern-software-dev-assignments\.claude\settings.json
 ```
 
 **The session.** What task, against what repo, and how many `POST /v1/messages` requests did it produce?
-> TODO
+> Two tasks, one to restore after tests failed, one to add a csv export feature using polars
+> ~ 20 POST requests
 
 | Requirement | Evidence |
 |---|---|
-| Touched ≥ 2 files | TODO |
-| Failed at least once | TODO |
-| Long enough to plan | TODO |
-| Your own repo | TODO |
+| Touched ≥ 2 files | Yes |
+| Failed at least once | Yes |
+| Long enough to plan | Yes |
+| Your own repo | Tes |
 
 **What you redacted** from the excerpts quoted below, and why:
 > TODO
