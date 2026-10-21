@@ -130,10 +130,10 @@ The tools were added pretty much right away, they likely just needed some time t
 | Key schema fields | path, old_string, new_string, replace_all | skill, args |
 | Required vs. optional vs. not exposed, and why | Only optional is replace all since it defaults to false, path, finder text, and replacement text need to be specified for the tool to function | The args are optional as not all skills require them. The name of the skill is necessary as an identifier |
 | Description is defending against… (quote + the wrong behavior) | "\n- \`old_string` must match the file exactly, including indentation" Defends against not using the exact finder string | "If a `<command-name>` block is already present this turn, the skill is loaded — follow it directly rather than calling again.\n" Defends against calling a skill repeatedy that's already been loaded |
-| Deliberately does *not* do… and what that implies | The tool does not explicitly add or delete text without replacing, implying those behaviors are separated to different tools | TODO |
+| Deliberately does *not* do… and what that implies | The tool does not explicitly add or delete text without replacing, implying those behaviors are separated to different tools | The tool makes it clear that it does not execute built in CLI commands as they aren't skills, implying there's a separate tool to handle those and a way to distinguish skills from built in commands when using the / syntax |
 
 Why these two?
-> TODO
+> These two tools provide a decent scope of capability without overlap, one is for file manipulation and one is for administration and execution of internal functionality
 
 
 ## Part IV: Behavioral Analysis
