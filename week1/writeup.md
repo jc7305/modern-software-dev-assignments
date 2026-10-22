@@ -156,9 +156,9 @@ What it tried next, and turns to recover:
 How does one get created and advanced? What does the model see about task state each turn, and where does it live in the request:
 > TODO
 
-**d. Subagents**: `TODO: label` · evidence: `TODO` \
+**d. Subagents**: `[INFERRED]` · evidence: Agent tool description \
 When the agent delegates, what the subagent is told, and what comes back:
-> TODO
+> The agent delegates to subagents whenever the user specifically requests to do so. The subagent is either given the full conversation context in the case of a fork, or starts from scratch otherwise. The subagent returns a final report to the main agent only.
 
 **e. Context management**: `TODO: label` · evidence: `TODO` \
 What changed in the payloads as the session grew:
