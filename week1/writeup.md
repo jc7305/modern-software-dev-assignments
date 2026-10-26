@@ -16,13 +16,13 @@ settings file:     C:\Users\Jonathan\Documents\modern-software-dev-assignments\.
 
 | Requirement | Evidence |
 |---|---|
-| Touched ≥ 2 files | Yes |
-| Failed at least once | Yes |
-| Long enough to plan | Yes |
-| Your own repo | Tes |
+| Touched ≥ 2 files | Touched utils.py and app.py |
+| Failed at least once | "No module named 'polars'\r\nPython 3.13.1" |
+| Long enough to plan | "Next I'll run the full test suite and ruff." |
+| Your own repo | [REDACTED: FILE PATH]\\Assignment 1\\inventory |
 
 **What you redacted** from the excerpts quoted below, and why:
-> TODO
+> I redacted file paths and my email as they are sensitive personal information.
 
 
 ## Part II: System Prompt Annotation
@@ -140,42 +140,42 @@ Why these two?
 
 **Every answer must be labeled `[OBSERVED]` or `[INFERRED]` and cite its evidence. Unlabeled answers earn no credit.**
 
-**a. Error recovery**: `TODO: label` · evidence: `TODO`
+**a. Error recovery**: `[OBSERVED]` · evidence: `Assistant and User messages`
 
 What the agent saw, verbatim:
 ```
-TODO
+"Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n    import polars; print(polars.__version__)\r\n    ^^^^^^^^^^^^^\r\nModuleNotFoundError: No module named 'polars'\r\nPython 3.13.1"
 ```
 What it tried next, and turns to recover:
-> TODO
+> "Polars isn't installed yet, so I'll install it into the venv." The agent tried to install Polars after the error. This was successful and resolved it, meaning it took only 1 turn to recover.
 
-**b. Planning**: `TODO: label` · evidence: `TODO`
-> TODO
+**b. Planning**: `[Observed]` · evidence: `Various messages`
+> Simple planning happens implicitly in different message texts where the AI will narrate what it plans to do next. Ex. "Everything is in place. Next I'll run the full test suite and ruff." 
 
-**c. Plans and task state**: `TODO: label` · evidence: `TODO` \
+**c. Plans and task state**: `[INFERRED]` · evidence: `System message` \
 How does one get created and advanced? What does the model see about task state each turn, and where does it live in the request:
-> TODO
+> Explicit plans are mainly created using the Plan agent. Once the Plan agent is called it will create and return a step-by-step plan than can be used by the main agent. Like other subagents the full conversation context can be passed to it. It is integrated directly in the request.
 
-**d. Subagents**: `[INFERRED]` · evidence: Agent tool description \
+**d. Subagents**: `[INFERRED]` · evidence: `Agent tool description` \
 When the agent delegates, what the subagent is told, and what comes back:
 > The agent delegates to subagents whenever the user specifically requests to do so. The subagent is either given the full conversation context in the case of a fork, or starts from scratch otherwise. The subagent returns a final report to the main agent only.
 
-**e. Context management**: `TODO: label` · evidence: `TODO` \
+**e. Context management**: `[INFERRED]` · evidence: `System Prompt` \
 What changed in the payloads as the session grew:
-> TODO
+> As the session grows to a certain length, the current context gets summarized to save on costs. The summary and any context that remains unsummarized is provided in the payload for the next context window.
 
 
 ## Part V: Reflection
 
 **Two decisions you would copy**, and the problem each solves:
-1. TODO
-2. TODO
+1. I would copy the decision to allow for the model to summarize conversation context periodically and work off of a new context window containing the summarized (and shortened) context. I've experienced firsthand how easy it can be to let a context window grow too large and start burning through credits, so having an automated system for the model handeling this is very beneficial to keeping costs reasonable.
+2. I would also copy the decision to split discrete functions into their own separate tools with a system to manage them. I can imagine with so many different features that the model would have a hard time using a wide breadth of functionality without carefully defining each feature including its scope and input parameters and providing a simple method for invoking all of them.
 
 **One you would make differently** (engage with why it might be there):
-> TODO
+> Instead of deferring tools for later use that don't have good reason to be unavailable from the beginning, I would load all tools right away to ensure that a tool isn't called before it is loaded, adding an extra step to the call. This may be here to not overwhelm the model right away with too many tools to choose from.
 
 **One thing the trace changed** about how you will steer a coding agent:
-> TODO
+> I wasn't aware of the guardrails on planning mode and how Claude won't automatically go into it unless specifically instructed to. In the past I have always stuck to the Agent mode but I will be more explicit with my planning phase from now on before leading into the Agent mode.
 
 
 ## Submission
